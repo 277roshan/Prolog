@@ -14,7 +14,8 @@ sum-up-numbers-simple(L, N):-
 
 sum-up-numbers-simple(L, N):-
    [First|Rest] = L,
-   N is First + sum-up-numbers-simple(Rest).
+   sum-up-numbers-simple(Rest, Rest_sum).
+   N is First + Rest_sum
 
 
    
