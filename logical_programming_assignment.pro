@@ -1,3 +1,5 @@
 sum-up-numbers-simple(L, N):-
-  [Single] = L
-  N = L
+  [Single] = L,
+   N is Single.
+
+
