@@ -42,6 +42,14 @@ sum-up-numbers-general(L, N):-
    length(L,0),
    N is 0.
 
+% there is 1 element and it is a list
+sum-up-numbers-general(L, N):-
+   [Single] = L,
+   is_list(Single)
+   sum-up-numbers-general(Single, Answer)
+   N is Answer.
+
+
 % there is 1 element and it is number
 sum-up-numbers-general(L, N):-
    [Single] = L,
