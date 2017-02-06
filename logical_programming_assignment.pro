@@ -1,3 +1,7 @@
+%author Roshan Thapaliya
+%Structures of Programming Language: Logical Programming
+
+
 
 % list is empty
 sum-up-numbers-simple(L, N):-
@@ -92,6 +96,38 @@ sum-up-numbers-general(L, N):-
    sum-up-numbers-general(Rest, Rest_sum),
    sum-up-numbers-general(First, First_sum),
    N is First_sum + Rest_sum.
+
+
+
+
+
+% compare to see which is lesser than number
+
+lesser-than-number(Number1,Number2, Lesser):-
+	Number1<=Number2,
+	Lesser is Number1.
+
+lesser-than-number(Number1,Number2, Lesser):-
+	Number2<=Number1,
+	Lesser is Number2. 
+
+
+%find min in a list
+
+min-in-list(L, Value):-
+	[First] = Value,
+	number(First),
+	Value is First.
+
+min-in-list(L, Value):-
+	[First, Second].
+
+
+
+
+
+
+	
 
 
 
