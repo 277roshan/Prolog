@@ -126,7 +126,6 @@ lesser-than-number(Number1,Number2, Lesser):-
 	Lesser is Number1.
 	 
 
-
 %find min in a list
 
 min-in-list(L, Value):-
@@ -136,19 +135,17 @@ min-in-list(L, Value):-
 
 min-in-list(L, Value):-
 	[First|Second] = L,
-	number(First),
+	[inner] = [Second],
+	number(inner),
 	min-in-list(Second, Rest_min),
 	lesser-than-number(First, Rest_min, Less_val),
-	Value is Less_val
+	Value is Less_val.
 
-
-
-
-
-
-
-
-	
-
-
-
+min-in-list(L, Value):-
+	[First|Second] = L,
+	[inner] = [Second],
+	\+number(inner),
+	[Rest_first| Rest]=Second,
+	min-in-list(Rest, Rest_min),
+	lesser-than-number(First, Rest_min, Less_val),
+	Value is Less_val.
