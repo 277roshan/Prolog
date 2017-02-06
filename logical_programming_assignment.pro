@@ -69,7 +69,7 @@ sum-up-numbers-general(L, N):-
 sum-up-numbers-general(L, N):-
    [First|Rest] = L,
    \+number(First),
-   \+is_list(List),
+   \+is_list(First),
    sum-up-numbers-general(Rest, Rest_sum),
    N is Rest_sum.
 
