@@ -125,6 +125,11 @@ lesser-than-number(Number1,Number2, Lesser):-
 	number(Number1),
 	Lesser is Number1.
 	 
+%number exists check
+number-exists([Y|T]):-
+	number(Y);
+	number-exists(T).
+	
 
 %find min in a list
 
@@ -134,18 +139,20 @@ min-in-list(L, Value):-
 	Value is First.
 
 min-in-list(L, Value):-
+	[First,Second] = L,
+	lesser-than-number(First, Second, Less_val),
+	Value is Less_val.
+
+min-in-list(L, Value):-
 	[First|Second] = L,
-	[inner] = [Second],
-	number(inner),
+	number-exists(Second),
 	min-in-list(Second, Rest_min),
 	lesser-than-number(First, Rest_min, Less_val),
 	Value is Less_val.
 
 min-in-list(L, Value):-
 	[First|Second] = L,
-	[inner] = [Second],
-	\+number(inner),
-	[Rest_first| Rest]=Second,
-	min-in-list(Rest, Rest_min),
-	lesser-than-number(First, Rest_min, Less_val),
-	Value is Less_val.
+	\+number-exists(Second, Rest_min),
+	Value is First.
+
+
