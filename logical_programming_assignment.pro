@@ -135,7 +135,7 @@ min-in-list(L, Value):-
 	Value is First.
 
 min-in-list(L, Value):-
-	[First | Second] = L,
+	[First|Second] = L,
 	number(First),
 	min-in-list(Second, Rest_min),
 	lesser-than-number(First, Rest_min, Less_val),
