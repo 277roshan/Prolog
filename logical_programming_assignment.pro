@@ -104,12 +104,27 @@ sum-up-numbers-general(L, N):-
 % compare to see which is lesser than number
 
 lesser-than-number(Number1,Number2, Lesser):-
+	number(Number1),
+	number(Number2),
 	Number1=<Number2,
 	Lesser is Number1.
 
 lesser-than-number(Number1,Number2, Lesser):-
+	number(Number1),
+	number(Number2),
 	Number2=<Number1,
-	Lesser is Number2. 
+	Lesser is Number2.
+
+lesser-than-number(Number1,Number2, Lesser):-
+	\+number(Number1),
+	number(Number2),
+	Lesser is Number2.
+
+lesser-than-number(Number1,Number2, Lesser):-
+	\+number(Number2),
+	number(Number1),
+	Lesser is Number1.
+	 
 
 
 %find min in a list
@@ -118,6 +133,13 @@ min-in-list(L, Value):-
 	[First] = L,
 	number(First),
 	Value is First.
+
+min-in-list(L, Value):-
+	[First | Second] = L,
+	number(First),
+	min-in-list(Second, Rest_min),
+	lesser-than-number(First, Rest_min, Less_val),
+	Value is Less_val
 
 
 
