@@ -56,10 +56,11 @@ sum-up-numbers-general(L, N):-
    number(Single),
    N is Single.
 
-% there is 1 element and it is not a number
+% there is 1 element and it is not a number and not a list
 sum-up-numbers-general(L, N):-
    [Single] = L,
    \+number(Single),
+   \+is_list(Single),
    N is 0.
 
 % there are more than 1 elements
@@ -79,6 +80,17 @@ sum-up-numbers-general(L, N):-
    number(First),
    sum-up-numbers-general(Rest, Rest_sum),
    N is First + Rest_sum.
+
+
+% there are more than 1 elements
+% recursive call on the tail
+% first element is a list so recursive call
+sum-up-numbers-general(L, N):-
+   [First|Rest] = L,
+   is_list(First),
+   sum-up-numbers-general(Rest, Rest_sum),
+   sum-up-numbers-general(First, First_sum),
+   N is First_sum + Rest_sum.
 
 
 
