@@ -46,8 +46,8 @@ sum-up-numbers-general(L, N):-
 sum-up-numbers-general(L, N):-
    [Single] = L,
    is_list(Single),
-   sum-up-numbers-general(Single, Answer),
-   N is Answer.
+   sum-up-numbers-general(Single, A),
+   N is A.
 
 
 % there is 1 element and it is number
@@ -69,6 +69,7 @@ sum-up-numbers-general(L, N):-
 sum-up-numbers-general(L, N):-
    [First|Rest] = L,
    \+number(First),
+   \+is_list(List),
    sum-up-numbers-general(Rest, Rest_sum),
    N is Rest_sum.
 
