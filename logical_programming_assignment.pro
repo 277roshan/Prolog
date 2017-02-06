@@ -99,8 +99,6 @@ sum-up-numbers-general(L, N):-
 
 
 
-
-
 % compare to see which is lesser than number
 
 lesser-than-number(Number1,Number2, Lesser):-
@@ -144,6 +142,7 @@ min-in-list(L, Value):-
 	Value is Less_val.
 
 min-in-list(L, Value):-
+	number-exists(L),
 	[First|Second] = L,
 	number-exists(Second),
 	min-in-list(Second, Rest_min),
@@ -151,8 +150,9 @@ min-in-list(L, Value):-
 	Value is Less_val.
 
 min-in-list(L, Value):-
+	number-exists(L),
 	[First|Second] = L,
-	\+number-exists(Second, Rest_min),
+	\+number-exists(Second),
 	Value is First.
 
 
