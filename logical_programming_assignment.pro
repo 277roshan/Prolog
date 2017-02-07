@@ -39,7 +39,6 @@ sum-up-numbers-simple(L, N):-
    N is First + Rest_sum.
 
 
-   
 
 % list is empty
 sum-up-numbers-general(L, N):-
@@ -154,5 +153,16 @@ min-in-list(L, Value):-
 	[First|Second] = L,
 	\+number-exists(Second),
 	Value is First.
+
+% smallest number in L2
+% take L1 number bigger than smallest number in L2
+% find smallest of these numbers
+
+min-above-min(L1, L2, N):-	
+	min-in-list(L2, Small_L1);
+	min-in-list(L1, Small_L2),
+	N is Small_L2
+
+
 
 
