@@ -132,13 +132,13 @@ number-exists([Y|T]):-
 greater-than-number(Number1,Number2, Greater):-
 	number(Number1),
 	number(Number2),
-	Number1>Number2,
+	Number1>=Number2,
 	Greater is Number1.
 
 greater-than-number(Number1,Number2, Greater):-
 	number(Number1),
 	number(Number2),
-	Number2>Number1,
+	Number2>=Number1,
 	Greater is Number2.
 	
 
@@ -186,16 +186,11 @@ greater-than-numbers(L, Check, Numbers):-
 	append([],Numbers_, Numbers).
 
 greater-than-numbers(L, Check, Numbers):-
-	[X] = L,
-	greater-than-number(X, Check, Greater),
-	Greater=:=Check,
-	append([],Numbers_, Numbers).
+	length(L,0),
+	number(Check),
+	append([],[],Numbers).
 
-greater-than-numbers(L, Check, Numbers):-
-	[X] = L,
-	greater-than-number(X, Check, Greater),
-	Greater=\=Check,
-	append([Greater],Numbers_, Numbers).
+
 
 
 
