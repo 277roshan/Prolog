@@ -129,6 +129,17 @@ number-exists([Y|T]):-
 
 
 %greater than number
+greater-than-number(Number1,Number2, Greater):-
+	number(Number1),
+	number(Number2),
+	Number1=<Number2,
+	Lesser is Number1.
+
+greater-than-number(Number1,Number2, Greater):-
+	number(Number1),
+	number(Number2),
+	Number2=<Number1,
+	Lesser is Number2.
 	
 
 %find min in a list
@@ -162,7 +173,7 @@ min-in-list(L, Value):-
 
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
-	lesser-than-number(X, Check,),
+	greater-than-number(X, Check,),
 
 
 
