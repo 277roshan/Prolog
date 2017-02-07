@@ -197,6 +197,8 @@ greater-than-numbers(L, Check, Numbers):-
 % take L1 number bigger than smallest number in L2
 % find smallest of these numbers
 min-above-min(L1, L2, N):-
+	min-in-list(L2, Min_Val),
+
 
 
 
