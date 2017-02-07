@@ -174,11 +174,28 @@ min-in-list(L, Value):-
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
 	greater-than-number(X, Check, Greater),
-	Greater=:=Check,
-	greater-than-number(Y, Check, Numbers_),
-	append([Greater], Numbers_, Ans),
-	Numbers is Ans.
+	Greater=\=Check,
+	greater-than-numbers(Y, Check, Numbers_),
+	append([Greater], Numbers_, Numbers).
 
+greater-than-numbers(L, Check, Numbers):-
+	[X|Y] = L,
+	greater-than-number(X, Check, Greater),
+	Greater=:=Check,
+	greater-than-numbers(Y, Check, Numbers_),
+	append([],Numbers_, Numbers).
+
+greater-than-numbers(L, Check, Numbers):-
+	[X] = L,
+	greater-than-number(X, Check, Greater),
+	Greater=:=Check,
+	append([],Numbers_, Numbers).
+
+greater-than-numbers(L, Check, Numbers):-
+	[X] = L,
+	greater-than-number(X, Check, Greater),
+	Greater=\=Check,
+	append([Greater],Numbers_, Numbers).
 
 
 
