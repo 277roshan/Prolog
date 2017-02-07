@@ -128,7 +128,7 @@ number-exists([Y|T]):-
 	number-exists(T).
 
 
-%greater than number
+%greater than or equal to number helper
 greater-than-number(Number1,Number2, Greater):-
 	number(Number1),
 	number(Number2),
@@ -193,11 +193,10 @@ greater-than-numbers(L, Check, Numbers):-
 
 
 
-
-
 % smallest number in L2
 % take L1 number bigger than smallest number in L2
 % find smallest of these numbers
+min-above-min(L1, L2, N):-
 
 
 
