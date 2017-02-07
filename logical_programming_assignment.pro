@@ -173,7 +173,9 @@ min-in-list(L, Value):-
 
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
-	greater-than-number(X, Check,),
+	greater-than-number(X, Check, Greater),
+	Greater!=Check,
+	append([Greater], Ans)
 
 
 
