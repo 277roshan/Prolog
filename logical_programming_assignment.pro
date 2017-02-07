@@ -173,6 +173,7 @@ min-in-list(L, Value):-
 
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
+	number(X),
 	greater-than-number(X, Check, Greater),
 	Greater=\=Check,
 	greater-than-numbers(Y, Check, Numbers_),
@@ -180,8 +181,15 @@ greater-than-numbers(L, Check, Numbers):-
 
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
+	number(X),
 	greater-than-number(X, Check, Greater),
 	Greater=:=Check,
+	greater-than-numbers(Y, Check, Numbers_),
+	append([],Numbers_, Numbers).
+
+greater-than-numbers(L, Check, Numbers):-
+	[X|Y] = L,
+	\+number(X),
 	greater-than-numbers(Y, Check, Numbers_),
 	append([],Numbers_, Numbers).
 
@@ -198,6 +206,15 @@ greater-than-numbers(L, Check, Numbers):-
 % find smallest of these numbers
 min-above-min(L1, L2, N):-
 	min-in-list(L2, Min_Val),
+	greater-than-numbers(L1,Min_Val, Filtered_numbers),
+	min-in-list(Filtered_numbers, Ans),
+	N is Ans.
+
+min-above-min(L1, L2, N):-
+	\+min-in-list(L2, Min_Val),
+	min-in-list(L1, Ans),
+	N is Ans.
+
 
 
 
