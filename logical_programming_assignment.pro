@@ -126,6 +126,9 @@ lesser-than-number(Number1,Number2, Lesser):-
 number-exists([Y|T]):-
 	number(Y);
 	number-exists(T).
+
+
+%greater than number
 	
 
 %find min in a list
@@ -154,14 +157,20 @@ min-in-list(L, Value):-
 	\+number-exists(Second),
 	Value is First.
 
+
+%get all numbers greater than given number
+
+greater-than-numbers(L, Check, Numbers):-
+	[X|Y] = L,
+	lesser-than-number(X, Check,),
+
+
+
 % smallest number in L2
 % take L1 number bigger than smallest number in L2
 % find smallest of these numbers
 
-min-above-min(L1, L2, N):-	
-	min-in-list(L2, Small_L1);
-	min-in-list(L1, Small_L2),
-	N is Small_L2
+
 
 
 
