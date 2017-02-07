@@ -132,13 +132,13 @@ number-exists([Y|T]):-
 greater-than-number(Number1,Number2, Greater):-
 	number(Number1),
 	number(Number2),
-	Number1=>Number2,
+	Number1>Number2,
 	Greater is Number1.
 
 greater-than-number(Number1,Number2, Greater):-
 	number(Number1),
 	number(Number2),
-	Number2=>Number1,
+	Number2>Number1,
 	Greater is Number2.
 	
 
@@ -174,8 +174,12 @@ min-in-list(L, Value):-
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
 	greater-than-number(X, Check, Greater),
-	Greater!=Check,
-	append([Greater], Ans).
+	Greater=:=Check,
+	greater-than-number(Y, Check, Numbers_),
+	append([Greater], Numbers_, Ans),
+	Numbers is Ans.
+
+
 
 
 
