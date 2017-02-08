@@ -141,7 +141,6 @@ greater-than-number(Number1,Number2, Greater):-
 	
 
 %find min in a list
-
 min-in-list(L, Value):-
 	[First] = L,
 	number(First),
@@ -168,7 +167,6 @@ min-in-list(L, Value):-
 
 
 %get all numbers greater than given number
-
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
 	number(X),
@@ -215,6 +213,10 @@ min-above-min(L1, L2, N):-
 % create a simple list from nested
 
 nested-to-simple(L, Simple):-
+	[First|Rest] = L,
+	is_list(First)
+	nested-to-simple(First, Simple_First)
+	
 
 
 
