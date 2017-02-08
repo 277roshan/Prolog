@@ -224,8 +224,9 @@ nested-to-simple(L, Simple):-
 	is_list(First),
 	nested-to-simple(Rest, Simple_Rest),
 	append([First], Simple_Rest, Simple).
-	
 
+%Base case
+nested-to-simple([],[]).
 
 
 
