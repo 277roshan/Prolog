@@ -304,10 +304,12 @@ remove-duplicates(L, Ans):-
 
 
 
-%common-unique-elements(L1,L2,N):-
-%	[First|Rest] = L1
-%	nested-to-simple(L1, L1_simple),
-%	nested-to-simple(L2, L2_simple),
+common-unique-elements(L1,L2,N):-
+	nested-to-simple(L1, L1_simple),
+	nested-to-simple(L2, L2_simple),
+	simple-intersection(L1_simple, L2_simple,Ans),
+	remove-duplicates(Ans, Final),
+	append([],Final,N).
 
 	
 
