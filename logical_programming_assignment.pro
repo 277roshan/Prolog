@@ -244,14 +244,12 @@ simple-intersection(L1, L2, N):-
 simple-intersection(L1, L2, N):-
 	[First] = L1,
 	member(First, L2),
-	simple-intersection(Rest,L2,M),
-	append([First],M, N).
+	append([First],[], N).
 
 simple-intersection(L1, L2, N):-
 	[First] = L1,
 	\+member(First, L2),
-	simple-intersection(Rest,L2,M),
-	append([],M, N).
+	append([],[], N).
 
 %base case
 simple-intersection([], L2, []).
@@ -274,12 +272,12 @@ remove-element(L, E, Ans):-
 remove-element(L, E, Ans):-
 	[X] = L,
 	member(E,[X]),
-	append([],Ans2,Ans).
+	append([],[],Ans).
 
 remove-element(L, E, Ans):-
 	[X] = L,
 	\+member(E,[X]),
-	append([X],Ans2,Ans).
+	append([X],[],Ans).
 
 remove-element(L, E, Ans):-
 	length(L,0),
@@ -290,7 +288,7 @@ remove-element(L, E, Ans):-
 
 remove-duplicates(L, Ans):-
 	[X|Y] = L,
-	remove-element(L, X, Val),
+	remove-element(Y, X, Val),
 	remove-duplicates(Val, Ans2),
 	append([X],Ans2,Ans).
 
@@ -306,10 +304,11 @@ remove-duplicates(L, Ans):-
 
 common-unique-elements(L1,L2,N):-
 	nested-to-simple(L1, L1_simple),
+	remove-duplicates(L1_simple, L1_F),
 	nested-to-simple(L2, L2_simple),
-	simple-intersection(L1_simple, L2_simple,Ans),
-	remove-duplicates(Ans, Final),
-	append([],Final,N).
+	remove-duplicates(L2_simple, L2_F),
+	simple-intersection(L1_F, L2_F,Final_Ans),
+	append(Final_Ans,[],N).
 
 	
 
