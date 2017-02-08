@@ -225,11 +225,38 @@ nested-to-simple(L, Simple):-
 	nested-to-simple(Rest, Simple_Rest),
 	append([First], Simple_Rest, Simple).
 
-
-
-
 %Base case
 nested-to-simple([],[]).
+
+%common-unique-elements(L1,L2,N):-
+%	[First|Rest] = L1
+%	nested-to-simple(L1, L1_simple),
+%	nested-to-simple(L2, L2_simple),
+
+simple-intersection(L1, L2, N):-
+	[First|Rest] = L1,
+	member(First, L2),
+	append([First],[], N).
+
+simple-intersection(L1, L2, N):-
+	[First|Rest] = L1,
+	\+member(First, L2),
+	append([],[], N).
+
+simple-intersection(L1, L2, N):-
+	[First] = L1,
+	member(First, L2),
+	append([First],[], N).
+
+simple-intersection(L1, L2, N):-
+	[First] = L1,
+	\+member(First, L2),
+	append([],[], N).
+
+simple-intersection([], L2, []).
+
+
+
 
 
 
