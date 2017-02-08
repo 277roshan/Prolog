@@ -95,7 +95,7 @@ sum-up-numbers-general(L, N):-
 
 
 
-% compare to see which is lesser than number
+% compare to see which is lesser than or equal to number
 
 lesser-than-number(Number1,Number2, Lesser):-
 	number(Number1),
@@ -139,7 +139,7 @@ greater-than-number(Number1,Number2, Greater):-
 	Greater is Number2.
 	
 
-%find min in a list
+%find minimum value in a list helper
 min-in-list(L, Value):-
 	[First] = L,
 	number(First),
@@ -165,7 +165,7 @@ min-in-list(L, Value):-
 	Value is First.
 
 
-%get all numbers greater than given number
+%get all numbers greater than given number used as a filter
 greater-than-numbers(L, Check, Numbers):-
 	[X|Y] = L,
 	number(X),
@@ -227,7 +227,7 @@ nested_to_simple(L, Simple):-
 %Base case
 nested_to_simple([],[]).
 
-
+%implement simple intersection for two given simple lists
 simple_intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	member(First, L2),
@@ -244,36 +244,41 @@ simple_intersection(L1, L2, N):-
 simple_intersection([], L2, []).
 
 
-%remove element from simple list
+%remove all instances of an element from simple list
 
+%recursive definition with rest of the list
 remove_element(L, E, Ans):-
 	[X|Y] = L,
 	member(E,[X]),
 	remove_element(Y, E, Ans2),
 	append([],Ans2,Ans).
 
+%recursive definition with rest of the list
 remove_element(L, E, Ans):-
 	[X|Y] = L,
 	\+member(E,[X]),
 	remove_element(Y, E, Ans2),
 	append([X],Ans2,Ans).
 
+%if element member and single element
 remove_element(L, E, Ans):-
 	[X] = L,
 	member(E,[X]),
 	append([],[],Ans).
 
+%if element not member and single element
 remove_element(L, E, Ans):-
 	[X] = L,
 	\+member(E,[X]),
 	append([X],[],Ans).
 
+%for length 0
 remove_element(L, E, Ans):-
 	length(L,0),
 	append([],[],Ans).
 
 
-%remove duplicates
+%remove duplicates helper for common-unique-element
 
 remove_duplicates(L, Ans):-
 	[X|Y] = L,
@@ -285,7 +290,7 @@ remove_duplicates(L, Ans):-
 	length(L,0),
 	append([],[],Ans).
 
-
+%common unique elements implemented using helper functions
 common-unique-elements(L1,L2,N):-
 	nested_to_simple(L1, L1_simple),
     nested_to_simple(L2, L2_simple),
