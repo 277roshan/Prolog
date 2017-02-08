@@ -227,6 +227,7 @@ nested-to-simple(L, Simple):-
 
 
 
+
 %Base case
 nested-to-simple([],[]).
 
