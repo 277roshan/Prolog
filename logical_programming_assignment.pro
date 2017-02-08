@@ -291,7 +291,7 @@ common_unique_elements(L1,L2,N):-
     nested_to_simple(L2, L2_simple),
     remove_duplicates(L1_simple, L1_F),
     remove_duplicates(L2_simple, L2_F),
-    simple_intersection(L1_simple,L2_simple, F),
+    simple_intersection(L1_simple,L2_simple, F),!,
     append([],F,N).
 
 
