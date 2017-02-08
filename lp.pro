@@ -216,13 +216,15 @@ nested_to_simple(L, Simple):-
 	is_list(First),
 	nested_to_simple(First, Simple_First),
 	nested_to_simple(Rest, Simple_Rest),
-	append(Simple_First, Simple_Rest, Simple).
+	append(Simple_First, Simple_Rest, Simple1),
+	remove_duplicates(Simple1,Simple).
 
 nested_to_simple(L, Simple):-
 	[First|Rest] = L,
 	\+is_list(First),
 	nested_to_simple(Rest, Simple_Rest),
-	append([First], Simple_Rest, Simple).
+	append([First], Simple_Rest, Simple1),
+	remove_duplicates(Simple1, Simple).
 
 %Base case
 nested_to_simple([],[]).
@@ -232,13 +234,16 @@ simple_intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	member(First, L2),
 	simple_intersection(Rest,L2,M),
-	append([First],M, N).
+	append([First],M, N1), 
+	remove_duplicates(N1, N).
 
 simple_intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	\+member(First, L2),
 	simple_intersection(Rest,L2,M),
-	append([],M, N).
+	append([],M, N1),
+	remove_duplicates(N1, N).
+
 
 %base case
 simple_intersection([], L2, []).
@@ -292,13 +297,16 @@ remove_duplicates(L, Ans):-
 
 %common unique elements implemented using helper functions
 common-unique-elements(L1,L2,N):-
-	nested_to_simple(L1, L1_simple),
-    nested_to_simple(L2, L2_simple),
-    remove_duplicates(L1_simple, L1_F),
-    remove_duplicates(L2_simple, L2_F),
-    simple_intersection(L1_F,L2_F, F),!,
-    append([],F,Val),
-    remove_duplicates(Val,N).
+	nested_to_simple(L1, L1simple),
+    nested_to_simple(L2, L2simple),
+    remove_duplicates(L1simple, L1F),
+    remove_duplicates(L2simple, L2F),
+    simple_intersection(L1F,L2F, F),
+    remove_duplicates(F,Xo),!,
+    append([],Xo,N).
+    
+
+    
 
 
 
