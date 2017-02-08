@@ -223,7 +223,15 @@ nested-to-simple(L, Simple):-
 	[First|Rest] = L,
 	\+is_list(First),
 	nested-to-simple(Rest, Simple_Rest),
+	\+member(First, Simple),
 	append([First], Simple_Rest, Simple).
+
+nested-to-simple(L, Simple):-
+	[First|Rest] = L,
+	\+is_list(First),
+	nested-to-simple(Rest, Simple_Rest),
+	member(First, Simple),
+	append([], Simple_Rest, Simple).
 
 %Base case
 nested-to-simple([],[]).
