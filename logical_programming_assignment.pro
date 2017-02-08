@@ -37,7 +37,6 @@ sum-up-numbers-simple(L, N):-
    N is First + Rest_sum.
 
 
-
 % list is empty
 sum-up-numbers-general(L, N):-
    length(L,0),
@@ -212,107 +211,88 @@ min-above-min(L1, L2, N):-
 
 % create a simple list from nested
 
-nested-to-simple(L, Simple):-
+nested_to_simple(L, Simple):-
 	[First|Rest] = L,
 	is_list(First),
-	nested-to-simple(First, Simple_First),
-	nested-to-simple(Rest, Simple_Rest),
+	nested_to_simple(First, Simple_First),
+	nested_to_simple(Rest, Simple_Rest),
 	append(Simple_First, Simple_Rest, Simple).
 
-nested-to-simple(L, Simple):-
+nested_to_simple(L, Simple):-
 	[First|Rest] = L,
 	\+is_list(First),
-	nested-to-simple(Rest, Simple_Rest),
+	nested_to_simple(Rest, Simple_Rest),
 	append([First], Simple_Rest, Simple).
 
 %Base case
-nested-to-simple([],[]).
+nested_to_simple([],[]).
 
 
-simple-intersection(L1, L2, N):-
+simple_intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	member(First, L2),
-	simple-intersection(Rest,L2,M),
+	simple_intersection(Rest,L2,M),
 	append([First],M, N).
 
-simple-intersection(L1, L2, N):-
+simple_intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	\+member(First, L2),
-	simple-intersection(Rest,L2,M),
+	simple_intersection(Rest,L2,M),
 	append([],M, N).
 
-simple-intersection(L1, L2, N):-
-	[First] = L1,
-	member(First, L2),
-	append([First],[], N).
-
-simple-intersection(L1, L2, N):-
-	[First] = L1,
-	\+member(First, L2),
-	append([],[], N).
-
 %base case
-simple-intersection([], L2, []).
+simple_intersection([], L2, []).
 
 
 %remove element from simple list
 
-remove-element(L, E, Ans):-
+remove_element(L, E, Ans):-
 	[X|Y] = L,
 	member(E,[X]),
-	remove-element(Y, E, Ans2),
+	remove_element(Y, E, Ans2),
 	append([],Ans2,Ans).
 
-remove-element(L, E, Ans):-
+remove_element(L, E, Ans):-
 	[X|Y] = L,
 	\+member(E,[X]),
-	remove-element(Y, E, Ans2),
+	remove_element(Y, E, Ans2),
 	append([X],Ans2,Ans).
 
-remove-element(L, E, Ans):-
+remove_element(L, E, Ans):-
 	[X] = L,
 	member(E,[X]),
 	append([],[],Ans).
 
-remove-element(L, E, Ans):-
+remove_element(L, E, Ans):-
 	[X] = L,
 	\+member(E,[X]),
 	append([X],[],Ans).
 
-remove-element(L, E, Ans):-
+remove_element(L, E, Ans):-
 	length(L,0),
 	append([],[],Ans).
 
 
 %remove duplicates
 
-remove-duplicates(L, Ans):-
+remove_duplicates(L, Ans):-
 	[X|Y] = L,
-	remove-element(Y, X, Val),
-	remove-duplicates(Val, Ans2),
+	remove_element(L, X, Val),
+	remove_duplicates(Val, Ans2),
 	append([X],Ans2,Ans).
 
-remove-duplicates(L, Ans):-
-	[X] = L,
-	append([],[],Ans).
-
-remove-duplicates(L, Ans):-
+remove_duplicates(L, Ans):-
 	length(L,0),
 	append([],[],Ans).
 
 
-
-common-unique-elements(L1,L2,N):-
-	nested-to-simple(L1, L1_simple),
-	remove-duplicates(L1_simple, L1_F),
-	nested-to-simple(L2, L2_simple),
-	remove-duplicates(L2_simple, L2_F),
-	simple-intersection(L1_F, L2_F,Final_Ans),
-	append(Final_Ans,[],N).
-
-	
-
-
+common_unique_elements(L1,L2,N):-
+	nested_to_simple(L1, L1_simple),
+    nested_to_simple(L2, L2_simple),
+    remove_duplicates(L1_simple, L1_F),
+    remove_duplicates(L2_simple, L2_F),
+    simple_intersection(L1_simple,L2_simple, F),
+    append([],F,N).
 
 
 
