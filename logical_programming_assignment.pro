@@ -1,8 +1,6 @@
 %author Roshan Thapaliya
 %Structures of Programming Language: Logical Programming
 
-
-
 % list is empty
 sum-up-numbers-simple(L, N):-
    length(L,0),
@@ -199,8 +197,6 @@ greater-than-numbers(L, Check, Numbers):-
 	append([],[],Numbers).
 
 
-
-
 % smallest number in L2
 % take L1 number bigger than smallest number in L2
 % find smallest of these numbers
@@ -215,6 +211,10 @@ min-above-min(L1, L2, N):-
 	min-in-list(L1, Ans),
 	N is Ans.
 
+
+% create a simple list from nested
+
+nested-to-simple(L, Simple):-
 
 
 
