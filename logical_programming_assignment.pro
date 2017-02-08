@@ -216,6 +216,8 @@ nested-to-simple(L, Simple):-
 	[First|Rest] = L,
 	is_list(First)
 	nested-to-simple(First, Simple_First)
+	nested-to-simple(Rest, Simple_Rest)
+	append(Simple_First, Simple_Rest, Simple).
 	
 
 
