@@ -228,10 +228,6 @@ nested-to-simple(L, Simple):-
 %Base case
 nested-to-simple([],[]).
 
-%common-unique-elements(L1,L2,N):-
-%	[First|Rest] = L1
-%	nested-to-simple(L1, L1_simple),
-%	nested-to-simple(L2, L2_simple),
 
 simple-intersection(L1, L2, N):-
 	[First|Rest] = L1,
@@ -260,6 +256,60 @@ simple-intersection(L1, L2, N):-
 %base case
 simple-intersection([], L2, []).
 
+
+%remove element from simple list
+
+remove-element(L, E, Ans):-
+	[X|Y] = L,
+	member(E,[X]),
+	remove-element(Y, E, Ans2),
+	append([],Ans2,Ans).
+
+remove-element(L, E, Ans):-
+	[X|Y] = L,
+	\+member(E,[X]),
+	remove-element(Y, E, Ans2),
+	append([X],Ans2,Ans).
+
+remove-element(L, E, Ans):-
+	[X] = L,
+	member(E,[X]),
+	append([],Ans2,Ans).
+
+remove-element(L, E, Ans):-
+	[X] = L,
+	\+member(E,[X]),
+	append([X],Ans2,Ans).
+
+remove-element(L, E, Ans):-
+	length(L,0),
+	append([],[],Ans).
+
+
+%remove duplicates
+
+remove-duplicates(L, Ans):-
+	[X|Y] = L,
+	remove-element(L, X, Val),
+	remove-duplicates(Val, Ans2),
+	append([X],Ans2,Ans).
+
+remove-duplicates(L, Ans):-
+	[X] = L,
+	append([],[],Ans).
+
+remove-duplicates(L, Ans):-
+	length(L,0),
+	append([],[],Ans).
+
+
+
+%common-unique-elements(L1,L2,N):-
+%	[First|Rest] = L1
+%	nested-to-simple(L1, L1_simple),
+%	nested-to-simple(L2, L2_simple),
+
+	
 
 
 
