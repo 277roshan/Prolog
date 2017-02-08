@@ -255,8 +255,9 @@ simple-intersection(L1, L2, N):-
 	[First] = L1,
 	\+member(First, L2),
 	simple-intersection(Rest,L2,M),
-	append([F],M, N).
+	append([],M, N).
 
+%base case
 simple-intersection([], L2, []).
 
 
