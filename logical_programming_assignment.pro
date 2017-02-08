@@ -236,22 +236,26 @@ nested-to-simple([],[]).
 simple-intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	member(First, L2),
-	append([First],[], N).
+	simple-intersection(Rest,L2,M),
+	append([First],M, N).
 
 simple-intersection(L1, L2, N):-
 	[First|Rest] = L1,
 	\+member(First, L2),
-	append([],[], N).
+	simple-intersection(Rest,L2,M),
+	append([],M, N).
 
 simple-intersection(L1, L2, N):-
 	[First] = L1,
 	member(First, L2),
-	append([First],[], N).
+	simple-intersection(Rest,L2,M),
+	append([First],M, N).
 
 simple-intersection(L1, L2, N):-
 	[First] = L1,
 	\+member(First, L2),
-	append([],[], N).
+	simple-intersection(Rest,L2,M),
+	append([F],M, N).
 
 simple-intersection([], L2, []).
 
